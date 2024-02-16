@@ -1,0 +1,136 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 16.04.2 ] */
+
+/* [wxMaxima: title   start ]
+What is General Relativity?
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\hypersetup{pdfauthor={Daniel Volinski},
+            pdftitle={What is General Relativity?},
+            pdfsubject={What is General Relativity?},
+            pdfkeywords={XylyXylyX}}
+
+Based on XylyXylyX Playlist
+\href{https://www.youtube.com/playlist?list=PLRlVmXqzHjURQIIebhT7UNTwGQHUEPlsb}
+{What is General Relativity?}
+
+Written by Daniel Volinski at \href{mailto:danielvolinski@yahoo.es}{danielvolinski@yahoo.es}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+info:build_info()$info@version;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+reset()$kill(all)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+derivabbrev:true$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ratprint:false$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fpprintprec:5$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('draw,'version)=false then load(draw)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot_size:[1024,768]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('itensor,'version)=false then load(itensor)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('ctensor,'version)=false then load(ctensor)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ctrgsimp:true$
+ratchristof:true$
+ratriemann:true$
+rateinstein:true$
+ratweyl:true$
+ratfac:true$
+verbose:true$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: page break    ] */
+
+/* [wxMaxima: input   start ] */
+assume(0≤r)$
+assume(0≤theta,theta≤π)$
+assume(0≤sin(theta))$
+assume(0≤phi,phi≤2*π)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cframe_flag:true$
+gcd:subres$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ct_coordsys(exteriorschwarzschild,all)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(lg)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(ug:invert(lg))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(σ:makelist(√(lfg . lg)[i,i],i,1,dim))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(e:√(lfg . ug))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+riemann(false)$
+lriemann(false)$
+uriemann(false)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ricci(false)$
+uricci(false)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+weyl(false)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+nptetrad(true)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+np.transpose(npi);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+psi(true)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+petrov();
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

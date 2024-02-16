@@ -1,0 +1,101 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 16.04.2 ] */
+
+/* [wxMaxima: title   start ]
+Gamma matrices
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\hypersetup{pdfauthor={Daniel Volinski},
+            pdftitle={The Dirac Equation},
+            pdfsubject={QED Prerequisites}}
+
+Based on XylyXylyX Video
+\href{https://www.youtube.com/watch?v=BPUJEXcuu1M}
+{The Dirac Equation}
+
+Based on Wikipedia Article
+\href{https://en.wikipedia.org/wiki/Gamma_matrices}
+{Gamma matrices}
+
+Written by Daniel Volinski at \href{mailto:danielvolinski@yahoo.es}{danielvolinski@yahoo.es}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+info:build_info()$info@version;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+reset()$kill(all)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(linearalgebra)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dim:2$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(M_0:zeromatrix(dim,dim))$
+ldisplay(M_1:ident(dim))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(σ_0:matrix([1,0],[0,1]))$
+ldisplay(σ_1:matrix([0,1],[1,0]))$
+ldisplay(σ_2:matrix([0,-%i],[%i,0]))$
+ldisplay(σ_3:matrix([1,0],[0,-1]))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Dirac
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(γ_0:mat_fullunblocker(matrix([M_1,M_0],[M_0,-M_1])))$
+ldisplay(γ_1:mat_fullunblocker(matrix([M_0,σ_1],[-σ_1,M_0])))$
+ldisplay(γ_2:mat_fullunblocker(matrix([M_0,σ_2],[-σ_2,M_0])))$
+ldisplay(γ_3:mat_fullunblocker(matrix([M_0,σ_3],[-σ_3,M_0])))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(γ_5:%i*γ_0.γ_1.γ_2.γ_3)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Majorana
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(γ_0:mat_fullunblocker(matrix([M_0,σ_2],[σ_2,M_0])))$
+ldisplay(γ_1:mat_fullunblocker(matrix([σ_1,M_0],[M_0,σ_1])))$
+ldisplay(γ_2:mat_fullunblocker(matrix([M_0,-%i*σ_2],[%i*σ_2,M_0])))$
+ldisplay(γ_3:mat_fullunblocker(matrix([σ_3,M_0],[M_0,σ_3])))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(γ_5:%i*γ_0.γ_1.γ_2.γ_3)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Weyl
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(γ_0:mat_fullunblocker(matrix([M_0,M_1],[M_1,M_0])))$
+ldisplay(γ_1:mat_fullunblocker(matrix([M_0,σ_1],[-σ_1,M_0])))$
+ldisplay(γ_2:mat_fullunblocker(matrix([M_0,σ_2],[-σ_2,M_0])))$
+ldisplay(γ_3:mat_fullunblocker(matrix([M_0,σ_3],[-σ_3,M_0])))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(γ_5:%i*γ_0.γ_1.γ_2.γ_3)$
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

@@ -1,0 +1,381 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 16.04.2 ] */
+
+/* [wxMaxima: title   start ]
+Maxwell's Equations via Differential Forms
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\hypersetup{pdfauthor={Daniel Volinski},
+            pdftitle={Maxwell's Equations via Differential Forms},
+            pdfsubject={QED Prerequisites}}
+
+Based on XylyXylyX Video
+\href{https://www.youtube.com/watch?v=md7NSprSOnc}
+{Maxwell's Equations via Differential Forms}
+
+Written by Daniel Volinski at \href{mailto:danielvolinski@yahoo.es}{danielvolinski@yahoo.es}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+info:build_info()$info@version;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+reset()$kill(all)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('vect,'version)=false then load(vect)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('cartan,'version)=false then load(cartan)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('diff_form,'version)=false then load(diff_form)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Cartan}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ζ:[x0,x1,x2,x3]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+init_cartan(ζ)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+depends([a,b],ζ)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(α:a*(dx0~dx1)+b*(dx2~dx3))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(dα:edit(ext_diff(α)))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Euclidean}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+r:[x1,x2,x3]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+scalefactors(r)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+pbasis:apply(%poly,[Dx1,Dx2,Dx3])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(Dx1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(%));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(Dx2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(%));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(Dx3));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(%));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(Dx1@Dx2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(%));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(Dx1@Dx3));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(%));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(Dx2@Dx3));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(%));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(Dx1@Dx2@Dx3));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(%));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(f));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,h_st(%));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,nest2([h_st,h_st],f));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+$\mathbf{E}$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+E:[E_1,E_2,E_3]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+depends(E,r)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+$\mathbf{E}^\flat$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,vtof1(E));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+$\ast\mathbf{E}^\flat$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,nest2([h_st,vtof1],E));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+$\mathrm{d}\ast\mathbf{E}^\flat$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,nest2([d,h_st,vtof1],E))$
+format(%,pbasis);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+$\ast\mathrm{d}\ast\mathbf{E}^\flat$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,nest2([h_st,d,h_st,vtof1],E));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+$\nabla\cdot\mathbf{E}$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ev(express(div(E)),diff);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Verify}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+is(%=%th(2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+$\mathbf{B}$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+B:[B_1,B_2,B_3]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+depends(B,r)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+$\mathbf{B}^\flat$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,vtof1(B));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+$\mathrm{d}\mathbf{B}^\flat$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,nest2([d,vtof1],B))$
+format(%,pbasis);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+$\ast\mathrm{d}\mathbf{B}^\flat$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,nest2([h_st,d,vtof1],B))$
+format(%,pbasis);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+$\nabla\times\mathbf{B}$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ev(express(curl(B)),diff);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fstar_with_clf(r,r,vtof1(%))$
+format(%,pbasis);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Verify}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+is(%=%th(4));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Scalar field} $\mathrm{f}$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+depends(f,r)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+$\nabla\times(\nabla\mathrm{f})$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ev(express(grad(f)),diff);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ev(express(curl(%)),diff);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Vector field} $\mathbf{A}$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+A:[A_1,A_2,A_3]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+depends(A,r)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+$\nabla\cdot(\nabla\times\mathbf{A})$
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ev(express(curl(A)),diff);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ev(express(div(%)),diff);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

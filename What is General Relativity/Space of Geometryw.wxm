@@ -1,0 +1,586 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 16.04.2 ] */
+
+/* [wxMaxima: title   start ]
+Trial metric
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\hypersetup{pdfauthor={Daniel Volinski},
+            pdftitle={Cosmology},
+            pdfsubject={General Relativity},
+            pdfkeywords={Relatively Awesome}}
+
+Based on Relatively Awesome Playlist:
+\href{https://www.youtube.com/playlist?list=PL3K7YoCoygIB92cUfgWM3zsoQK_s-QRUL}
+{Cosmology}
+
+Written by Daniel Volinski at \href{mailto:danielvolinski@yahoo.es}{danielvolinski@yahoo.es}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+info:build_info()$info@version;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+reset()$kill(all)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+derivabbrev:true$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('itensor,'version)=false then load(itensor)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+imetric(g)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('ctensor,'version)=false then load(ctensor)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+declare(trigsimp,evfun)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+assume(0≤χ)$
+assume(0≤θ,θ≤π)$
+assume(0≤sin(θ))$
+assume(0≤φ,φ≤2*π)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ξ:ct_coords:[χ,θ,φ]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dim:length(ct_coords)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Covariant metric tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+depends(f,χ)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+lg:matrix([1,0,0],[0,f,0],[0,0,f*sin(θ)²])$
+ishow(g([μ,ν],[])=lg)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diagmatrixp(lg,dim);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Sets up the package for further calculations}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+cmetric()$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Contravariant metric tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ishow(g([],[μ,ν])=ug)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diagmatrixp(ug,dim);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Line element}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(ds²=diff(ct_coords).lg.transpose(diff(ct_coords)))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Christoffel symbols}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+christof(false)$
+for i thru dim do for j:i thru dim do for k thru dim do
+  if mcs[i,j,k]≠0 then 
+    ishow(Γ([ξ[i],ξ[j]],[ξ[k]])=mcs[i,j,k])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cdisplay(mcs,2)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+matrixp(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(Γ_2:genmatrix(lambda([i,j],mcs[2,i,j]),dim,dim))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+matrixp(Γ_2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Riemann Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+riemann(false)$
+lriemann(false)$
+uriemann(false)$
+for a thru dim do for b thru dim do
+  for c thru (if symmetricp(lg,dim) then b else dim) do
+    for d thru (if symmetricp(lg,dim) then a else dim) do
+      if riem[a,b,c,d]≠0 then
+        ishow(R(["  ",ξ[a],ξ[b],ξ[c]],[ξ[d]])=riem[a,b,c,d])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Ricci Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ric:zeromatrix(dim,dim)$
+ricci(false)$
+for a thru dim do for b:a thru dim do
+  if ric[a,b]≠0 then
+    ishow(R([ξ[a],ξ[b]])=factor(ric[a,b]))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diagmatrixp(ric,dim);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+uric:zeromatrix(dim,dim)$
+uricci(false)$
+for a thru dim do for b:a thru dim do
+  if uric[a,b]≠0 then
+    ishow(R([ξ[a]],[ξ[b]])=factor(uric[a,b]))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diagmatrixp(uric,dim);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Check Einstein manifold}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+[de]:solve(ric[2,2]=K*f,'diff(f,χ,2));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+assume(K<0)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+sol1:rootscontract(ode2(de,f,χ));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+sol1:ic2(sol1,χ=0,f=0,'diff(f,χ)=0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+forget(K<0)$
+assume(K>0)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+sol2:rootscontract(ode2(de,f,χ));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+sol2:ic2(sol2,χ=0,f=0,'diff(f,χ)=0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+rootscontract(expand(trigreduce((2/K)*sin(√(K/2)*χ)²)));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Vacuum Einstein field equations}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+map(ldisp,efe:findde(ric,2))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+deindex;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+map(ldisp,efe:findde(uric,2))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+deindex;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Scalar curvature}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+factor(radcan(scurvature()));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Kretschmann invariant}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+factor(radcan(rinvariant()));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Einstein Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ein:zeromatrix(dim,dim)$
+einstein(false)$
+for i thru dim do for j:i thru dim do
+  if ein[i,j]≠0 then
+    ishow(G([ξ[i]],[ξ[j]])=ein[i,j])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diagmatrixp(ein,dim);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+lein:zeromatrix(dim,dim)$
+leinstein(false)$
+for i thru dim do for j:i thru dim do
+  if lein[i,j]≠0 then
+    ishow(G([ξ[i],ξ[j]],[])=lein[i,j])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diagmatrixp(lein,dim);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Vacuum Einstein field equations}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+map(ldisp,findde(ein,2))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+deindex;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+map(ldisp,findde(lein,2))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+deindex;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Computes the Geodesics}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+cgeodesic(false)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Solve for second derivative of coordinates}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+linsol:linsolve(listarray(geod),diff(ξ,s,2))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+map(ldisp,fullratsimp(linsol))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(labels,χ,θ,φ)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ξ:ct_coords:[χ,θ,φ]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dim:length(ct_coords)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+declare(K,constant)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+f:(2/K)*sin(√(K/2)*χ)²$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+lg:matrix([1,0,0],[0,f,0],[0,0,f*sin(θ)²])$
+ishow(g([μ,ν],[])=lg)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diagmatrixp(lg,dim);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Sets up the package for further calculations}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+cmetric()$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Contravariant metric tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ishow(g([],[μ,ν])=ug)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diagmatrixp(ug,dim);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Line element}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(ds²=diff(ct_coords).lg.transpose(diff(ct_coords)))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Christoffel symbols}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+christof(false)$
+for i thru dim do for j:i thru dim do for k thru dim do
+  if mcs[i,j,k]≠0 then 
+    ishow(Γ([ξ[i],ξ[j]],[ξ[k]])=rootscontract(trigreduce(mcs[i,j,k])))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Riemann Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+riemann(false)$
+lriemann(false)$
+uriemann(false)$
+for a thru dim do for b thru dim do
+  for c thru (if symmetricp(lg,dim) then b else dim) do
+    for d thru (if symmetricp(lg,dim) then a else dim) do
+      if riem[a,b,c,d]≠0 then
+        ishow(R(["  ",ξ[a],ξ[b],ξ[c]],[ξ[d]])=riem[a,b,c,d])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Ricci Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ric:zeromatrix(dim,dim)$
+ricci(false)$
+ric:trigsimp(ric)$
+for a thru dim do for b:a thru dim do
+  if ric[a,b]≠0 then
+    ishow(R([ξ[a],ξ[b]])=ric[a,b])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diagmatrixp(ric,dim);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+uric:zeromatrix(dim,dim)$
+uricci(false)$
+for a thru dim do for b:a thru dim do
+  if uric[a,b]≠0 then
+    ishow(R([ξ[a]],[ξ[b]])=trigsimp(uric[a,b]))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diagmatrixp(uric,dim);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Scalar curvature}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+trigsimp(scurvature());
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Kretschmann invariant}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+trigsimp(rinvariant());
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Einstein Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ein:zeromatrix(dim,dim)$
+einstein(false)$
+for i thru dim do for j:i thru dim do
+  if ein[i,j]≠0 then
+    ishow(G([ξ[i]],[ξ[j]])=ein[i,j])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diagmatrixp(ein,dim);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+lein:zeromatrix(dim,dim)$
+leinstein(false)$
+for i thru dim do for j:i thru dim do
+  if lein[i,j]≠0 then
+    ishow(G([ξ[i],ξ[j]],[])=lein[i,j])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diagmatrixp(lein,dim);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Computes the Geodesics}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+cgeodesic(false)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Solve for second derivative of coordinates}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+linsol:linsolve(listarray(geod),diff(ξ,s,2))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+map(ldisp,rootscontract(trigsimp(linsol)))$
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

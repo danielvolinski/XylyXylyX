@@ -1,0 +1,349 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 16.04.2 ] */
+
+/* [wxMaxima: title   start ]
+The Glome
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\hypersetup{pdfauthor={Daniel Volinski},
+            pdftitle={The Glome},
+            pdfsubject={What is General Relativity?},
+            pdfkeywords={XylyXylyX}}
+
+Based on XylyXylyX Playlist
+\href{What is General Relativity?}
+{https://www.youtube.com/playlist?list=PLRlVmXqzHjURQIIebhT7UNTwGQHUEPlsb}
+
+\href{3-sphere}{https://en.wikipedia.org/wiki/3-sphere}
+
+Written by Daniel Volinski at \href{mailto:danielvolinski@yahoo.es}{danielvolinski@yahoo.es}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+info:build_info()$info@version;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+reset()$kill(all)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+derivabbrev:true$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ratprint:false$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fpprintprec:5$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('draw,'version)=false then load(draw)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot_size:[1024,768]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('itensor,'version)=false then load(itensor)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('ctensor,'version)=false then load(ctensor)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ctrgsimp:true$
+ratchristof:true$
+ratriemann:true$
+rateinstein:true$
+ratweyl:true$
+ratfac:true$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+assume(r≥0)$
+assume(0≤φ_1,φ_1≤π)$
+assume(sin(φ_1)≥0)$
+assume(0≤φ_2,φ_2≤π)$
+assume(sin(φ_2)≥0)$
+assume(0≤λ,λ≤2*π)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ct_coords:[φ_1,φ_2,λ]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dim:length(ct_coords)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Position Vector");
+Glome:R*[cos(φ_1),cos(φ_2)*sin(φ_1),sin(λ)*sin(φ_1)*sin(φ_2),cos(λ)*sin(φ_1)*sin(φ_2)]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Jacobian");
+J:jacobian(Glome,ct_coords);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Covariant Basis as Matrix");
+ldisplay(lb:transpose(J))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Covariant Basis Vectors");
+for i thru dim do ldisplay(le[ct_coords[i]]:lb[i])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Covariant Metric Tensor");
+ldisplay(lg:trigsimp(transpose(J).J))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Contravariant Metric Tensor");
+ldisplay(ug:trigsimp(invert(lg)))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Contravariant Basis as Matrix");
+ldisplay(ub:trigsimp(ug.lb))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Contravariant Basis Vectors");
+for i thru dim do ldisplay(ue[ct_coords[i]]:ub[i])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+trigsimp(lg.ug);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+trigsimp(lb.transpose(ub));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+trigsimp(ub.transpose(lb));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Covariant Metric Tensor");
+kill(f)$
+f[i,j]:=le[ct_coords[i]].le[ct_coords[j]]$
+trigsimp(genmatrix(f,dim,dim));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Contravariant Metric Tensor");
+kill(h)$
+h[i,j]:=ue[ct_coords[i]].ue[ct_coords[j]]$
+trigsimp(genmatrix(h,dim,dim));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+kill(k)$
+k[i,j]:=le[ct_coords[i]].ue[ct_coords[j]]$
+trigsimp(genmatrix(k,dim,dim));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: page break    ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(e[φ_1]:diff(Glome,φ_1))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(e[φ_2]:diff(Glome,φ_2))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(e[λ]:diff(Glome,λ))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Covariant Metric Tensor");
+kill(f)$
+f[i,j]:=e[ct_coords[i]].e[ct_coords[j]]$
+ishow(g([α,β],[])=lg:trigsimp(genmatrix(f,dim,dim)))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cmetric()$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Line element}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(ds²=factor(diff(ct_coords).lg.transpose(diff(ct_coords))))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Christoffel symbols of the second kind}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+christof(false)$
+for a thru dim do for b:a thru dim do for c thru dim do
+  if mcs[a,b,c]≠0 then 
+    ishow(Γ([ct_coords[a],ct_coords[b]],[ct_coords[c]])=trigsimp(mcs[a,b,c]))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+riemann(false)$
+lriemann(false)$
+uriemann(false)$
+for i thru dim do
+  for j thru dim do
+    for k thru (if symmetricp(lg,dim) then j else dim) do
+      for l thru (if symmetricp(lg,dim) then i else dim) do
+        if lriem[i,j,k,l]≠0 then
+          ishow(R([ct_coords[l],ct_coords[j],ct_coords[k],ct_coords[i]])=trigsimp(lriem[i,j,k,l]))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Spherical 4D
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+reset()$kill(all)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+assume(r≥0)$
+assume(0≤φ_1,φ_1≤π)$
+assume(sin(φ_1)≥0)$
+assume(0≤φ_2,φ_2≤π)$
+assume(sin(φ_2)≥0)$
+assume(0≤λ,λ≤2*π)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ζ:[r,φ_1,φ_2,λ]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Tr:[r*cos(φ_1),
+    r*cos(φ_2)*sin(φ_1),
+    r*sin(λ)*sin(φ_1)*sin(φ_2),
+    r*cos(λ)*sin(φ_1)*sin(φ_2)]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+J:jacobian(Tr,ζ)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Covariant Metric Tensor");
+ldisplay(lg:trigsimp(transpose(J).J))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Line element");
+ldisplay(ds²=diff(ζ).lg.transpose(diff(ζ)))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('diff_form,'version)=false then load(diff_form)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dim:fstar_with_clf(ζ,Tr,dim);
+coords:fstar_with_clf(ζ,Tr,coords);
+basis:fstar_with_clf(ζ,Tr,basis);
+scale_factor:fstar_with_clf(ζ,Tr,scale_factor);
+norm_table:fstar_with_clf(ζ,Tr,norm_table);
+volume:fstar_with_clf(ζ,Tr,volume);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+pbasis:apply(%poly,basis);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Glome
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+reset()$kill(all)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+assume(r≥0)$
+assume(0≤φ_1,φ_1≤π)$
+assume(sin(φ_1)≥0)$
+assume(0≤φ_2,φ_2≤π)$
+assume(sin(φ_2)≥0)$
+assume(0≤λ,λ≤2*π)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ζ:[φ_1,φ_2,λ]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+declare(R,constant)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Tr:[R*cos(φ_1),
+    R*cos(φ_2)*sin(φ_1),
+    R*sin(λ)*sin(φ_1)*sin(φ_2),
+    R*cos(λ)*sin(φ_1)*sin(φ_2)]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+J:jacobian(Tr,ζ)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Covariant Metric Tensor");
+ldisplay(lg:trigsimp(transpose(J).J))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+("Line element");
+ldisplay(ds²=factor(diff(ζ).lg.transpose(diff(ζ))))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('diff_form,'version)=false then load(diff_form)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dim:fstar_with_clf(ζ,Tr,dim);
+coords:fstar_with_clf(ζ,Tr,coords);
+basis:fstar_with_clf(ζ,Tr,basis);
+scale_factor:fstar_with_clf(ζ,Tr,scale_factor);
+norm_table:fstar_with_clf(ζ,Tr,norm_table);
+volume:fstar_with_clf(ζ,Tr,volume);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+pbasis:apply(%poly,basis);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

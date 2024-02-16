@@ -1,0 +1,699 @@
+\documentclass{article}
+
+%% Created with wxMaxima 16.04.2
+
+\setlength{\parskip}{\medskipamount}
+\setlength{\parindent}{0pt}
+\usepackage[utf8]{inputenc}
+\DeclareUnicodeCharacter{00B5}{\ensuremath{\mu}}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{ifthen}
+\newsavebox{\picturebox}
+\newlength{\pictureboxwidth}
+\newlength{\pictureboxheight}
+\newcommand{\includeimage}[1]{
+    \savebox{\picturebox}{\includegraphics{#1}}
+    \settoheight{\pictureboxheight}{\usebox{\picturebox}}
+    \settowidth{\pictureboxwidth}{\usebox{\picturebox}}
+    \ifthenelse{\lengthtest{\pictureboxwidth > .95\linewidth}}
+    {
+        \includegraphics[width=.95\linewidth,height=.80\textheight,keepaspectratio]{#1}
+    }
+    {
+        \ifthenelse{\lengthtest{\pictureboxheight>.80\textheight}}
+        {
+            \includegraphics[width=.95\linewidth,height=.80\textheight,keepaspectratio]{#1}
+            
+        }
+        {
+            \includegraphics{#1}
+        }
+    }
+}
+\newlength{\thislabelwidth}
+\DeclareMathOperator{\abs}{abs}
+\usepackage{animate} % This package is required because the wxMaxima configuration option
+                      % "Export animations to TeX" was enabled when this file was generated.
+
+\definecolor{labelcolor}{RGB}{100,0,0}
+
+\usepackage{fullpage}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage[bookmarks=false,pdfstartview={FitH},colorlinks=true,urlcolor=blue]{hyperref}
+\usepackage{bookmark}
+\usepackage{mathtools}
+
+\begin{document}
+
+\pagebreak{}
+{\Huge {\sc Black Hole Theory}}
+\setcounter{section}{0}
+\setcounter{subsection}{0}
+\setcounter{figure}{0}
+
+
+\hypersetup{pdfauthor={Daniel Volinski},
+            pdftitle={Black Hole Theory},
+            pdfsubject={Black Hole Theory},
+            pdfkeywords={The Polyphysics Project}}
+
+Based on The Polyphysics Project Playlist:
+\href{https://www.youtube.com/playlist?list=PL3K7YoCoygIAX0GdQGE2NmzM1xRXh4vSP}
+{Black Hole Theory}
+
+Written by Daniel Volinski at \href{mailto:danielvolinski@yahoo.es}{danielvolinski@yahoo.es}
+
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i2) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+info:build\_info()\$info\ensuremath{@}version;
+\end{minipage}
+%%% OUTPUT:
+\[\displaystyle
+\tag{\%{}o2}\label{o2} 
+\mbox{}
+\]5.38.1
+
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i2) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+reset()\$kill(all)\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i1) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+derivabbrev:true\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i2) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+ratprint:false\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i3) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+fpprintprec:5\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i4) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+if get('draw,'version)=false then load(draw)\$
+\end{minipage}
+%%% OUTPUT:
+%%%%%%%%%%%%%%%
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i5) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+wxplot\_size:[1024,768]\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i6) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+if get('optvar,'version)=false then load(optvar)\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i7) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+if get('rkf45,'version)=false then load(rkf45)\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i8) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+declare(s,mainvar)\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i9) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+declare(trigsimp,evfun)\$
+\end{minipage}
+
+\section{Settings}
+
+
+\section{Using optvar}
+
+
+\section{Using ctensor}
+
+
+\section{Using cartan}
+
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i66) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+kill(labels,t,r,\ensuremath{\theta},\ensuremath{\phi})\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i1) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+if get('cartan,'version)=false then load(cartan)\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i2) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+init\_cartan(\ensuremath{\xi})\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i3) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+cartan\_basis;
+\end{minipage}
+%%% OUTPUT:
+\[\displaystyle
+\tag{\%{}o3}\label{o3} 
+[\mathit{dt},\mathit{dr},\mathit{d\ensuremath{\theta}},\mathit{d\ensuremath{\phi}}]\mbox{}
+\]
+%%%%%%%%%%%%%%%
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i4) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+cartan\_coords;
+\end{minipage}
+%%% OUTPUT:
+\[\displaystyle
+\tag{\%{}o4}\label{o4} 
+[t,r,\mathit{\ensuremath{\theta}},\mathit{\ensuremath{\phi}}]\mbox{}
+\]
+%%%%%%%%%%%%%%%
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i5) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+cartan\_dim;
+\end{minipage}
+%%% OUTPUT:
+\[\displaystyle
+\tag{\%{}o5}\label{o5} 
+4\mbox{}
+\]
+%%%%%%%%%%%%%%%
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i6) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+extdim;
+\end{minipage}
+%%% OUTPUT:
+\[\displaystyle
+\tag{\%{}o6}\label{o6} 
+4\mbox{}
+\]
+%%%%%%%%%%%%%%%
+
+\textbf{Coframe}
+
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i7) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+depends([V,W],[r,t])\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i15) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+Eq\_t:e\_t=V*dt\$       sol\_t:solve(Eq\_t,dt)\$
+Eq\_r:e\_r=W*dr\$       sol\_r:solve(Eq\_r,dr)\$
+Eq\_\ensuremath{\theta}:e\_\ensuremath{\theta}=r*d\ensuremath{\theta}\$       sol\_\ensuremath{\theta}:solve(Eq\_\ensuremath{\theta},d\ensuremath{\theta})\$
+Eq\_\ensuremath{\phi}:e\_\ensuremath{\phi}=r*sin(\ensuremath{\theta})*d\ensuremath{\phi}\$sol\_\ensuremath{\phi}:solve(Eq\_\ensuremath{\phi},d\ensuremath{\phi})\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i16) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+ldisplay(e:ev([e\_t,e\_r,e\_\ensuremath{\theta},e\_\ensuremath{\phi}],Eq\_t,Eq\_r,Eq\_\ensuremath{\theta},Eq\_\ensuremath{\phi}))\$
+\end{minipage}
+%%% OUTPUT:
+\[\displaystyle
+\tag{\%{}t16}\label{t16} 
+e=[V\,\mathit{dt},W\,\mathit{dr},r\,\mathit{d\ensuremath{\theta}},r\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }]\mbox{}
+\]
+%%%%%%%%%%%%%%%
+
+\textbf{Exterior derivative of the coframe}
+
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i20) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+de\_t:ext\_diff(e\_t),Eq\_t\$
+de\_r:ext\_diff(e\_r),Eq\_r\$
+de\_\ensuremath{\theta}:ext\_diff(e\_\ensuremath{\theta}),Eq\_\ensuremath{\theta}\$
+de\_\ensuremath{\phi}:ext\_diff(e\_\ensuremath{\phi}),Eq\_\ensuremath{\phi}\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i21) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+ldisplay(de:[de\_t,de\_r,de\_\ensuremath{\theta},de\_\ensuremath{\phi}])\$
+\end{minipage}
+%%% OUTPUT:
+\[\displaystyle
+\tag{\%{}t21}\label{t21} 
+\mathit{de}=[-\left( {{V}_{r}}\right) \,\mathit{dr}\,\mathit{dt},\left( {{W}_{t}}\right) \,\mathit{dr}\,\mathit{dt},\mathit{dr}\,\mathit{d\ensuremath{\theta}},\mathit{dr}\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }+r\,\mathit{d\ensuremath{\theta}}\,\mathit{d\ensuremath{\phi}}\,\cos{\left( \mathit{\ensuremath{\theta}}\right) }]\mbox{}
+\]
+%%%%%%%%%%%%%%%
+
+\textbf{Cartan's first equation of structure}:
+$\mathrm{d}e^{\hat\alpha}+\omega_{\hat\beta}^{\hat\alpha}\wedge
+e^{\hat\beta}=0$
+
+
+\textbf{Cartan's second equation of structure}:
+$R_{\hat\beta}^{\hat\alpha}=\mathrm{d}\omega_{\hat\beta}^{\hat\alpha}
++\omega_{\hat\gamma}^{\hat\alpha}\wedge
+\omega_{\hat\beta}^{\hat\gamma}$
+
+
+\text{Relation between the Ricci tensor to the Riemann tensor}:
+$R_{\hat\beta}^{\hat\alpha}=R_{{\hat\beta}\gamma\delta}^{\hat\alpha}
+\,\mathrm{d}\gamma\wedge \mathrm{d}\delta$
+
+
+\text{To convert the Riemann tensor in orthonormal basis to
+coordinate basis we use the fact that}\\
+$R_{{\hat\beta}\gamma\delta}^{\hat\alpha}\,e_{\hat\alpha}^\alpha
+\,e_\beta^{\hat\beta}=R_{\beta\gamma\delta}^\alpha$, \text{where}
+$e_\beta^\alpha\,\mathrm{d}x^\beta=e^\alpha$ \text{is the
+connection 2-form}
+
+ldisplay(de\_t:ev(de\_t,sol\_t,sol\_r,sol\_\ensuremath{\theta},sol\_\ensuremath{\phi}))\$ ldisplay(de\_r:ev(de\_r,sol\_t,sol\_r,sol\_\ensuremath{\theta},sol\_\ensuremath{\phi}))\$ ldisplay(de\_\ensuremath{\theta}:ev(de\_\ensuremath{\theta},sol\_t,sol\_r,sol\_\ensuremath{\theta},sol\_\ensuremath{\phi}))\$ ldisplay(de\_\ensuremath{\phi}:ev(de\_\ensuremath{\phi},sol\_t,sol\_r,sol\_\ensuremath{\theta},sol\_\ensuremath{\phi}))\$ 
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i22) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+\ensuremath{\Omega}:genmatrix(lambda([i,j],sum(f[i,j,k]*cartan\_basis[k],k,1,dim)),dim,dim)\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i23) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+for i thru dim do for j thru dim do ldisplay(\ensuremath{\Omega}[i,j])\$
+\end{minipage}
+%%% OUTPUT:
+\[\displaystyle
+\tag{\%{}t23}\label{t23} 
+{{\mathit{\ensuremath{\Omega}}}_{1,1}}={{f}_{1,1,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{1,1,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{1,1,1}}\,\mathit{dt}+{{f}_{1,1,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t24}\label{t24} 
+{{\mathit{\ensuremath{\Omega}}}_{1,2}}={{f}_{1,2,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{1,2,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{1,2,1}}\,\mathit{dt}+{{f}_{1,2,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t25}\label{t25} 
+{{\mathit{\ensuremath{\Omega}}}_{1,3}}={{f}_{1,3,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{1,3,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{1,3,1}}\,\mathit{dt}+{{f}_{1,3,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t26}\label{t26} 
+{{\mathit{\ensuremath{\Omega}}}_{1,4}}={{f}_{1,4,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{1,4,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{1,4,1}}\,\mathit{dt}+{{f}_{1,4,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t27}\label{t27} 
+{{\mathit{\ensuremath{\Omega}}}_{2,1}}={{f}_{2,1,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{2,1,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{2,1,1}}\,\mathit{dt}+{{f}_{2,1,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t28}\label{t28} 
+{{\mathit{\ensuremath{\Omega}}}_{2,2}}={{f}_{2,2,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{2,2,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{2,2,1}}\,\mathit{dt}+{{f}_{2,2,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t29}\label{t29} 
+{{\mathit{\ensuremath{\Omega}}}_{2,3}}={{f}_{2,3,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{2,3,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{2,3,1}}\,\mathit{dt}+{{f}_{2,3,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t30}\label{t30} 
+{{\mathit{\ensuremath{\Omega}}}_{2,4}}={{f}_{2,4,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{2,4,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{2,4,1}}\,\mathit{dt}+{{f}_{2,4,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t31}\label{t31} 
+{{\mathit{\ensuremath{\Omega}}}_{3,1}}={{f}_{3,1,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{3,1,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{3,1,1}}\,\mathit{dt}+{{f}_{3,1,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t32}\label{t32} 
+{{\mathit{\ensuremath{\Omega}}}_{3,2}}={{f}_{3,2,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{3,2,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{3,2,1}}\,\mathit{dt}+{{f}_{3,2,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t33}\label{t33} 
+{{\mathit{\ensuremath{\Omega}}}_{3,3}}={{f}_{3,3,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{3,3,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{3,3,1}}\,\mathit{dt}+{{f}_{3,3,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t34}\label{t34} 
+{{\mathit{\ensuremath{\Omega}}}_{3,4}}={{f}_{3,4,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{3,4,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{3,4,1}}\,\mathit{dt}+{{f}_{3,4,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t35}\label{t35} 
+{{\mathit{\ensuremath{\Omega}}}_{4,1}}={{f}_{4,1,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{4,1,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{4,1,1}}\,\mathit{dt}+{{f}_{4,1,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t36}\label{t36} 
+{{\mathit{\ensuremath{\Omega}}}_{4,2}}={{f}_{4,2,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{4,2,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{4,2,1}}\,\mathit{dt}+{{f}_{4,2,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t37}\label{t37} 
+{{\mathit{\ensuremath{\Omega}}}_{4,3}}={{f}_{4,3,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{4,3,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{4,3,1}}\,\mathit{dt}+{{f}_{4,3,2}}\,\mathit{dr}\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t38}\label{t38} 
+{{\mathit{\ensuremath{\Omega}}}_{4,4}}={{f}_{4,4,4}}\,\mathit{d\ensuremath{\phi}}+{{f}_{4,4,3}}\,\mathit{d\ensuremath{\theta}}+{{f}_{4,4,1}}\,\mathit{dt}+{{f}_{4,4,2}}\,\mathit{dr}\mbox{}
+\]
+%%%%%%%%%%%%%%%
+
+\textbf{Change matrix multiplication operator}
+
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i39) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+matrix\_element\_mult:"\ensuremath{\sim }"\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i40) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+\ensuremath{\Theta}:expand(\ensuremath{\Omega}.e)\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i41) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+map(ldisp,\ensuremath{\Theta})\$
+\end{minipage}
+%%% OUTPUT:
+\[\displaystyle
+\tag{\%{}t41}\label{t41} 
+[{{f}_{1,4,3}}r\,\mathit{d\ensuremath{\theta}}\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }+{{f}_{1,4,1}}r\,\mathit{dt}\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }+{{f}_{1,4,2}}r\,\mathit{dr}\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }-{{f}_{1,3,4}}r\,\mathit{d\ensuremath{\theta}}\,\mathit{d\ensuremath{\phi}}-{{f}_{1,1,4}}V\,\mathit{dt}\,\mathit{d\ensuremath{\phi}}-{{f}_{1,2,4}}W\,\mathit{dr}\,\mathit{d\ensuremath{\phi}}+{{f}_{1,3,1}}r\,\mathit{dt}\,\mathit{d\ensuremath{\theta}}-{{f}_{1,1,3}}V\,\mathit{dt}\,\mathit{d\ensuremath{\theta}}+{{f}_{1,3,2}}r\,\mathit{dr}\,\mathit{d\ensuremath{\theta}}-{{f}_{1,2,3}}W\,\mathit{dr}\,\mathit{d\ensuremath{\theta}}+{{f}_{1,2,1}}W\,\mathit{dr}\,\mathit{dt}-{{f}_{1,1,2}}V\,\mathit{dr}\,\mathit{dt}]\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t42}\label{t42} 
+[{{f}_{2,4,3}}r\,\mathit{d\ensuremath{\theta}}\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }+{{f}_{2,4,1}}r\,\mathit{dt}\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }+{{f}_{2,4,2}}r\,\mathit{dr}\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }-{{f}_{2,3,4}}r\,\mathit{d\ensuremath{\theta}}\,\mathit{d\ensuremath{\phi}}-{{f}_{2,1,4}}V\,\mathit{dt}\,\mathit{d\ensuremath{\phi}}-{{f}_{2,2,4}}W\,\mathit{dr}\,\mathit{d\ensuremath{\phi}}+{{f}_{2,3,1}}r\,\mathit{dt}\,\mathit{d\ensuremath{\theta}}-{{f}_{2,1,3}}V\,\mathit{dt}\,\mathit{d\ensuremath{\theta}}+{{f}_{2,3,2}}r\,\mathit{dr}\,\mathit{d\ensuremath{\theta}}-{{f}_{2,2,3}}W\,\mathit{dr}\,\mathit{d\ensuremath{\theta}}+{{f}_{2,2,1}}W\,\mathit{dr}\,\mathit{dt}-{{f}_{2,1,2}}V\,\mathit{dr}\,\mathit{dt}]\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t43}\label{t43} 
+[{{f}_{3,4,3}}r\,\mathit{d\ensuremath{\theta}}\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }+{{f}_{3,4,1}}r\,\mathit{dt}\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }+{{f}_{3,4,2}}r\,\mathit{dr}\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }-{{f}_{3,3,4}}r\,\mathit{d\ensuremath{\theta}}\,\mathit{d\ensuremath{\phi}}-{{f}_{3,1,4}}V\,\mathit{dt}\,\mathit{d\ensuremath{\phi}}-{{f}_{3,2,4}}W\,\mathit{dr}\,\mathit{d\ensuremath{\phi}}+{{f}_{3,3,1}}r\,\mathit{dt}\,\mathit{d\ensuremath{\theta}}-{{f}_{3,1,3}}V\,\mathit{dt}\,\mathit{d\ensuremath{\theta}}+{{f}_{3,3,2}}r\,\mathit{dr}\,\mathit{d\ensuremath{\theta}}-{{f}_{3,2,3}}W\,\mathit{dr}\,\mathit{d\ensuremath{\theta}}+{{f}_{3,2,1}}W\,\mathit{dr}\,\mathit{dt}-{{f}_{3,1,2}}V\,\mathit{dr}\,\mathit{dt}]\mbox{}\]
+\[\displaystyle
+\]
+\[\tag{\%{}t44}\label{t44} 
+[{{f}_{4,4,3}}r\,\mathit{d\ensuremath{\theta}}\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }+{{f}_{4,4,1}}r\,\mathit{dt}\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }+{{f}_{4,4,2}}r\,\mathit{dr}\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }-{{f}_{4,3,4}}r\,\mathit{d\ensuremath{\theta}}\,\mathit{d\ensuremath{\phi}}-{{f}_{4,1,4}}V\,\mathit{dt}\,\mathit{d\ensuremath{\phi}}-{{f}_{4,2,4}}W\,\mathit{dr}\,\mathit{d\ensuremath{\phi}}+{{f}_{4,3,1}}r\,\mathit{dt}\,\mathit{d\ensuremath{\theta}}-{{f}_{4,1,3}}V\,\mathit{dt}\,\mathit{d\ensuremath{\theta}}+{{f}_{4,3,2}}r\,\mathit{dr}\,\mathit{d\ensuremath{\theta}}-{{f}_{4,2,3}}W\,\mathit{dr}\,\mathit{d\ensuremath{\theta}}+{{f}_{4,2,1}}W\,\mathit{dr}\,\mathit{dt}-{{f}_{4,1,2}}V\,\mathit{dr}\,\mathit{dt}]\mbox{}
+\]
+%%%%%%%%%%%%%%%
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i45) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+Eq:coeff(coeff(\ensuremath{\Theta}[1,1],dt),d\ensuremath{\theta})=coeff(coeff(de[1],dt),d\ensuremath{\theta});
+\end{minipage}
+%%% OUTPUT:
+\[\displaystyle
+\tag{Eq}\label{Eq}
+{{f}_{1,3,1}}r-{{f}_{1,1,3}}V=0\mbox{}
+\]
+%%%%%%%%%%%%%%%
+
+\textbf{Restore matrix multiplication operator}
+
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i46) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+matrix\_element\_mult:"*"\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i56) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+\ensuremath{\omega}:zeromatrix(dim,dim)\$
+\ensuremath{\omega}[1,2]:-diff(V,r)/V/W*e\_t+diff(W,t)/V/W*e\_r\$
+\ensuremath{\omega}[2,1]:+diff(V,r)/V/W*e\_t-diff(W,t)/V/W*e\_r\$
+\ensuremath{\omega}[3,2]:-1/r/W*e\_\ensuremath{\theta}\$
+\ensuremath{\omega}[2,3]:+1/r/W*e\_\ensuremath{\theta}\$
+\ensuremath{\omega}[4,3]:-cos(\ensuremath{\theta})/sin(\ensuremath{\theta})/r*e\_\ensuremath{\phi}\$
+\ensuremath{\omega}[3,4]:+cos(\ensuremath{\theta})/sin(\ensuremath{\theta})/r*e\_\ensuremath{\phi}\$
+\ensuremath{\omega}[2,4]:+1/r/W*e\_\ensuremath{\phi}\$
+\ensuremath{\omega}[4,2]:-1/r/W*e\_\ensuremath{\phi}\$
+ldisplay(\ensuremath{\omega})\$
+\end{minipage}
+%%% OUTPUT:
+\[\displaystyle
+\tag{\%{}t56}\label{t56} 
+\mathit{\ensuremath{\omega}}=\begin{pmatrix}0 & \frac{\left( {{W}_{t}}\right) \,{{e}_{r}}}{VW}-\frac{\left( {{V}_{r}}\right) \,{{e}_{t}}}{VW} & 0 & 0\\
+\frac{\left( {{V}_{r}}\right) \,{{e}_{t}}}{VW}-\frac{\left( {{W}_{t}}\right) \,{{e}_{r}}}{VW} & 0 & \frac{{{e}_{\mathit{\ensuremath{\theta}}}}}{Wr} & \frac{{{e}_{\mathit{\ensuremath{\phi}}}}}{Wr}\\
+0 & -\frac{{{e}_{\mathit{\ensuremath{\theta}}}}}{Wr} & 0 & \frac{{{e}_{\mathit{\ensuremath{\phi}}}}\cos{\left( \mathit{\ensuremath{\theta}}\right) }}{r\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }}\\
+0 & -\frac{{{e}_{\mathit{\ensuremath{\phi}}}}}{Wr} & -\frac{{{e}_{\mathit{\ensuremath{\phi}}}}\cos{\left( \mathit{\ensuremath{\theta}}\right) }}{r\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }} & 0\end{pmatrix}\mbox{}
+\]
+%%%%%%%%%%%%%%%
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i57) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+ldisplay(\ensuremath{\omega}:ev(\ensuremath{\omega},Eq\_t,Eq\_r,Eq\_\ensuremath{\theta},Eq\_\ensuremath{\phi}))\$
+\end{minipage}
+%%% OUTPUT:
+\[\displaystyle
+\tag{\%{}t57}\label{t57} 
+\mathit{\ensuremath{\omega}}=\begin{pmatrix}0 & \frac{\left( {{W}_{t}}\right) \,\mathit{dr}}{V}-\frac{\left( {{V}_{r}}\right) \,\mathit{dt}}{W} & 0 & 0\\
+\frac{\left( {{V}_{r}}\right) \,\mathit{dt}}{W}-\frac{\left( {{W}_{t}}\right) \,\mathit{dr}}{V} & 0 & \frac{\mathit{d\ensuremath{\theta}}}{W} & \frac{\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }}{W}\\
+0 & -\frac{\mathit{d\ensuremath{\theta}}}{W} & 0 & \mathit{d\ensuremath{\phi}}\,\cos{\left( \mathit{\ensuremath{\theta}}\right) }\\
+0 & -\frac{\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }}{W} & -\mathit{d\ensuremath{\phi}}\,\cos{\left( \mathit{\ensuremath{\theta}}\right) } & 0\end{pmatrix}\mbox{}
+\]
+%%%%%%%%%%%%%%%
+
+\textbf{Change matrix multiplication operator}
+
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i58) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+matrix\_element\_mult:"\ensuremath{\sim }"\$
+\end{minipage}
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i59) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+list\_matrix\_entries(\ensuremath{\omega}.e);
+\end{minipage}
+%%% OUTPUT:
+\[\displaystyle
+\tag{\%{}o59}\label{o59} 
+[-\left( {{V}_{r}}\right) \,\mathit{dr}\,\mathit{dt},\left( {{W}_{t}}\right) \,\mathit{dr}\,\mathit{dt},\mathit{dr}\,\mathit{d\ensuremath{\theta}},\mathit{dr}\,\mathit{d\ensuremath{\phi}}\,\sin{\left( \mathit{\ensuremath{\theta}}\right) }+r\,\mathit{d\ensuremath{\theta}}\,\mathit{d\ensuremath{\phi}}\,\cos{\left( \mathit{\ensuremath{\theta}}\right) }]\mbox{}
+\]
+%%%%%%%%%%%%%%%
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i60) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+is(\%=de);
+\end{minipage}
+%%% OUTPUT:
+\[\displaystyle
+\tag{\%{}o60}\label{o60} 
+\mbox{true}\mbox{}
+\]
+%%%%%%%%%%%%%%%
+
+\textbf{Restore matrix multiplication operator}
+
+
+
+\noindent
+%%%%%%%%%%%%%%%
+%%% INPUT:
+\begin{minipage}[t]{8ex}\color{red}\bf
+(\%{}i61) 
+\end{minipage}
+\begin{minipage}[t]{\textwidth}\color{blue}\tt
+matrix\_element\_mult:"*"\$
+\end{minipage}
+\end{document}

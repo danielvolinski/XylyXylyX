@@ -1,0 +1,783 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 16.04.2 ] */
+
+/* [wxMaxima: title   start ]
+What is General Relativity?
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\hypersetup{pdfauthor={Daniel Volinski},
+            pdftitle={What is General Relativity?},
+            pdfsubject={What is General Relativity?},
+            pdfkeywords={XylyXylyX}}
+
+Based on XylyXylyX Playlist
+\href{What is General Relativity?}
+{https://www.youtube.com/playlist?list=PLRlVmXqzHjURQIIebhT7UNTwGQHUEPlsb}
+
+Written by Daniel Volinski at \href{mailto:danielvolinski@yahoo.es}{danielvolinski@yahoo.es}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+info:build_info()$info@version;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+reset()$kill(all)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+derivabbrev:true$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ratprint:false$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+fpprintprec:5$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('draw,'version)=false then load(draw)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot_size:[1024,768]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('itensor,'version)=false then load(itensor)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('ctensor,'version)=false then load(ctensor)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ctrgsimp:true$
+ratchristof:true$
+ratriemann:true$
+rateinstein:true$
+ratweyl:true$
+ratfac:true$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: page break    ] */
+
+/* [wxMaxima: section start ]
+Transformation
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Spherical coordinates}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+verbose:true$
+ct_coordsys(spherical,minkowski,all)$
+verbose:false$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Line element}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(ds²=diff(ct_coords).lg.transpose(diff(ct_coords)))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{New coordinates}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+assume(v≥u)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ζ:[u,v,theta,phi]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Transformation}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+T:[ct-r,ct+r,theta,phi]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Inverse transformation}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+linsol:linsolve(part(map("=",ζ,T),[1,2]),part(ct_coords,[1,2]));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+line_element:diff(ct_coords).lg.transpose(diff(ct_coords)),linsol$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Covariant Metric Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ct_coords:ζ$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dim:length(ζ)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+lg:zeromatrix(dim,dim)$
+for i thru dim do
+  lg[i,i]:factor(coeff(expand(line_element),del(ct_coords[i])²))$
+for j thru dim do
+  for k thru dim do
+    if j≠k then lg[j,k]:½*coeff(coeff(expand(line_element),del(ct_coords[j])),del(ct_coords[k]))$
+ishow(g([μ,ν],[])=lg)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cmetric()$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Line element}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(ds²=diff(ct_coords).lg.transpose(diff(ct_coords)))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Christoffel symbols of the second kind}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+christof(false)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+for a thru dim do for b:a thru dim do for c thru dim do
+  if mcs[a,b,c]≠0 then
+    ishow(Γ([a,b],[c])=mcs[a,b,c])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+riemann(true)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: page break    ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(xrange = [0,4], yrange = [-4,4],
+         color = red,
+         makelist(implicit(ct+r=k,r,0,4,ct,-4,4),k,-4,4),
+         color = blue,
+         makelist(implicit(ct-r=k,r,0,4,ct,-4,4),k,-4,4))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: page break    ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d(atan(x),[x,-15,15],[ytics,π/2],[y,-π,π])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: page break    ] */
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(ytics = π/2, yrange = [-π,π], ylabel="atan(x)",
+         explicit(atan(x),x,-15,15))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: page break    ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{New coordinates}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+assume(V≥U)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ζ:[U,V,theta,phi]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Transformation}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+T:[atan(u),atan(v),theta,phi]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Inverse transformation}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+linsol:[u=tan(U),v=tan(V)]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+line_element:diff(ct_coords).lg.transpose(diff(ct_coords)),linsol$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Covariant Metric Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ct_coords:ζ$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dim:length(ζ)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+lg:zeromatrix(dim,dim)$
+for i thru dim do
+  lg[i,i]:coeff(expand(line_element),del(ct_coords[i])²)$
+for j thru dim do
+  for k thru dim do
+    if j≠k then lg[j,k]:½*coeff(coeff(expand(line_element),del(ct_coords[j])),del(ct_coords[k]))$
+ishow(g([μ,ν],[])=lg:subst([trigexpand(sin(V-U))=sin(V-U)],trigsimp(factor(expand(lg)))))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cmetric()$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Line element}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(ds²=diff(ct_coords).lg.transpose(diff(ct_coords)))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Christoffel symbols of the second kind}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+christof(false)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+for a thru dim do for b:a thru dim do for c thru dim do
+  if mcs[a,b,c]≠0 then
+    ishow(Γ([a,b],[c])=subst([trigexpand(sin(V-U))=sin(V-U)],trigsimp(trigexpand(mcs[a,b,c]))))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: page break    ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{New coordinates}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ζ:[ψ,ξ,theta,phi]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Transformation}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+T:[U+V,U-V,theta,phi]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Inverse transformation}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+linsol:linsolve(part(map("=",ζ,T),[1,2]),part(ct_coords,[1,2]));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+line_element:diff(ct_coords).lg.transpose(diff(ct_coords)),linsol$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Covariant Metric Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ct_coords:ζ$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dim:length(ζ)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+lg:zeromatrix(dim,dim)$
+for i thru dim do
+  lg[i,i]:coeff(expand(line_element),del(ct_coords[i])²)$
+for j thru dim do
+  for k thru dim do
+    if j≠k then lg[j,k]:½*coeff(coeff(expand(line_element),del(ct_coords[j])),del(ct_coords[k]))$
+ishow(g([μ,ν],[])=lg:subst([4*cos(ψ/2-ξ/2)²*cos(ψ/2+ξ/2)²=Ω²],lg))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cmetric()$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Line element}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(ds²=diff(ct_coords).lg.transpose(diff(ct_coords)))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Christoffel symbols of the second kind}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+christof(false)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+for a thru dim do for b:a thru dim do for c thru dim do
+  if mcs[a,b,c]≠0 then
+    ishow(Γ([a,b],[c])=trigsimp(expand(mcs[a,b,c])))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Riemann Curvature Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+riemann(false)$
+lriemann(false)$
+uriemann(false)$
+for a thru dim do
+  for b thru dim do
+    for c thru (if symmetricp(lg,dim) then b else dim) do
+      for d thru (if symmetricp(lg,dim) then a else dim) do
+        if lriem[a,b,c,d]≠0 then
+          ishow(R([ct_coords[c],ct_coords[a],ct_coords[d],ct_coords[b]],[])=trigsimp(expand(lriem[a,b,c,d])))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Ricci Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ricci(false)$
+uricci(false)$
+for a thru dim do
+  for b:a thru dim do
+    if ric[a,b]≠0 then 
+      ishow(R([ct_coords[a],ct_coords[b]],[])=trigsimp(expand(ric[a,b])))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Ricci Scalar}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+trigsimp(expand(scurvature()));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Kretschmann invariant}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+trigsimp(expand(rinvariant()));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Einstein Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+einstein(false)$
+leinstein(false)$
+for a thru dim do
+  for b:a thru dim do
+    if lein[a,b]≠0 then 
+      ishow(G([ct_coords[a],ct_coords[b]],[])=trigsimp(expand(lein[a,b])))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Weyl conformal tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+weyl(false)$
+for i thru dim do
+  for j from (if symmetricp(lg,dim) then i+1 else 1) thru dim do
+    for k from (if symmetricp(lg,dim) then i else 1) thru dim do
+      for l from (if symmetricp(lg,dim) then k+1 else 1) thru (if (symmetricp(lg,dim) and k=i) then j else dim) do
+        if trigsimp(weyl[i,j,k,l])≠0 then
+          ishow(W([ct_coords[i],ct_coords[j],ct_coords[k],ct_coords[l]],[])=weyl[i,j,k,l])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: page break    ] */
+
+/* [wxMaxima: section start ]
+2.1.4 Conform-compactified coordinates
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+assume(ψ≥-π,ψ≤π)$
+assume(ξ>0,ξ<π)$
+assume(θ>0,θ<π)$
+assume(φ≥0,φ<2*π)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ct_coords:[ψ,ξ,θ,φ]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+dim:length(ct_coords)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Line element}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ldisplay(ds²=line_element:-del(ψ)²+del(ξ)²+sin(ξ)²*(del(θ)²+sin(θ)²*del(φ)²))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Covariant Metric Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+lg:zeromatrix(dim,dim)$
+for i thru dim do
+  lg[i,i]:coeff(expand(line_element),del(ct_coords[i])²)$
+for j thru dim do
+  for k thru dim do
+    if j≠k then lg[j,k]:½*coeff(coeff(expand(line_element),del(ct_coords[j])),del(ct_coords[k]))$
+ishow(g([μ,ν],[])=lg)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+cmetric()$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Christoffel symbols of the second kind}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+christof(false)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+for a thru dim do for b:a thru dim do for c thru dim do
+  if mcs[a,b,c]≠0 then
+    mcs[a,b,c]:ratsimp(mcs[a,b,c])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+for a thru dim do for b:a thru dim do for c thru dim do
+  if mcs[a,b,c]≠0 then 
+    ishow(Γ([ct_coords[a],ct_coords[b]],[ct_coords[c]])=mcs[a,b,c])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+for a thru dim do for b:a thru dim do for c thru dim do
+  if mcs[a,b,c]≠0 then
+    ishow(Γ([a,b],[c])=mcs[a,b,c])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Riemann Curvature Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+riemann(false)$
+lriemann(false)$
+uriemann(false)$
+for a thru dim do
+  for b thru dim do
+    for c thru (if symmetricp(lg,dim) then b else dim) do
+      for d thru (if symmetricp(lg,dim) then a else dim) do
+        if lriem[a,b,c,d]≠0 then
+          ishow(R([ct_coords[c],ct_coords[a],ct_coords[d],ct_coords[b]],[])=trigsimp(expand(lriem[a,b,c,d])))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Ricci Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+ricci(false)$
+uricci(false)$
+for a thru dim do
+  for b:a thru dim do
+    if ric[a,b]≠0 then 
+      ishow(R([ct_coords[a],ct_coords[b]],[])=trigsimp(expand(ric[a,b])))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Ricci Scalar}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+trigsimp(expand(scurvature()));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Kretschmann invariant}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+trigsimp(expand(rinvariant()));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Einstein Tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+einstein(false)$
+leinstein(false)$
+for a thru dim do
+  for b:a thru dim do
+    if lein[a,b]≠0 then 
+      ishow(G([ct_coords[a],ct_coords[b]],[])=trigsimp(expand(lein[a,b])))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Weyl conformal tensor}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+weyl(false)$
+for i thru dim do
+  for j from (if symmetricp(lg,dim) then i+1 else 1) thru dim do
+    for k from (if symmetricp(lg,dim) then i else 1) thru dim do
+      for l from (if symmetricp(lg,dim) then k+1 else 1) thru (if (symmetricp(lg,dim) and k=i) then j else dim) do
+        if trigsimp(weyl[i,j,k,l])≠0 then
+          ishow(W([ct_coords[i],ct_coords[j],ct_coords[k],ct_coords[l]],[])=weyl[i,j,k,l])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Geodesics}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+cgeodesic(true)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\textbf{Solve for the first derivative of the coordinate derivative}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+Eq:makelist(Eq[i],i,1,dim)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+for i thru dim do Eq[i]:first(solve(geod[i],diff(ct_coords[i],s,2)))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+map(ldisp,trigsimp(Eq))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: page break    ] */
+
+/* [wxMaxima: input   start ] */
+draw2d(title      = "Carter-Penrose Diagram",
+       file_name  = "Penrose",
+       terminal   = 'pngcairo,
+       proportional_axes = xy,
+       dimensions = wxplot_size,
+       xrange     = [0,π],
+       yrange     = [-π,π],
+       xaxis      = true,
+       yaxis      = true,
+       xlabel     = "r",
+       ylabel     = "t",
+
+       ip_grid    = [150,150],
+       ip_grid_in = [50,50],
+       
+       line_width = 2,
+       color = black,
+       implicit(t=r-π,r,0,5,t,-5,5),
+       implicit(t=π-r,r,0,5,t,-5,5),
+
+       label(["t = {/Symbol {/=12 \\245}}",0.5,3.0]),
+       label(["t = {/Symbol {/=12 - \\245}}",0.5,-3.0]),
+       label(["r = {/Symbol {/=12 \\245}}",2.5,0.3]),
+       label(["U^{+}",2.0,2.0]),
+       label(["U^{-}",2.0,-2.0]),
+       
+       transform=[atan(t+r)+atan(t-r),atan(t+r)-atan(t-r),r,t],
+    
+       line_width = 1,
+       color = green,
+       makelist(implicit(r=k/10,r,-15,15,t,-15,15),k,-9,9),
+       color = red,
+       makelist(implicit(t=k/10,r,-15,15,t,-15,15),k,-9,9),
+       color = blue,
+       makelist(implicit(t+r=k/10,r,-15,15,t,-15,15),k,-5,5),
+       makelist(implicit(t-r=k/10,r,-15,15,t,-15,15),k,-5,5))$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+show_image("Penrose.png")$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Eq1:atan(t+r)=½*(ψ+ξ)$
+Eq2:atan(t-r)=½*(ψ-ξ)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+linsolve([Eq1,Eq2],[ψ,ξ]);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

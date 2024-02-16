@@ -1,0 +1,360 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 16.04.2 ] */
+
+/* [wxMaxima: title   start ]
+Minkowski space
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+TeX:
+
+\hypersetup{pdfauthor={Daniel Volinski},
+            pdftitle={Minkowski space},
+            pdfsubject={QED Prerequisites}}
+
+Based on XylyXylyX Video
+\href{https://www.youtube.com/watch?v=md7NSprSOnc}
+{Minkowski space}
+
+Written by Daniel Volinski at \href{mailto:danielvolinski@yahoo.es}{danielvolinski@yahoo.es}
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+info:build_info()$info@version;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+reset()$kill(all)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+if get('diff_form,'version)=false then load(diff_form)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: fold    start ] */
+
+/* [wxMaxima: input   start ] */
+r:[x0,x1,x2,x3]$
+M:[-1,1,1,1]$
+R:[%i*x0,x1,x2,x3]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(new_cartan_test4)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(f);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx0@Dx1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx0@Dx2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx0@Dx3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx1@Dx2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx1@Dx3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx2@Dx3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx0@Dx1@Dx2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx0@Dx1@Dx3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx0@Dx2@Dx3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx1@Dx2@Dx3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx0@Dx1@Dx2@Dx3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: fold    end   ] */
+
+/* [wxMaxima: section start ]
+
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: fold    start ] */
+
+/* [wxMaxima: input   start ] */
+r:[t,x,y,z]$
+M:[-1,1,1,1]$
+R:[%i*t,x,y,z]$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load(new_cartan_test4)$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(f);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dt);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dy);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dz);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dt@Dx);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dt@Dy);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dt@Dz);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx@Dy);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx@Dz);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dy@Dz);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dt@Dx@Dy);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dt@Dx@Dz);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dt@Dy@Dz);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dx@Dy@Dz);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(Dt@Dx@Dy@Dz);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h_st(%);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: fold    end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
